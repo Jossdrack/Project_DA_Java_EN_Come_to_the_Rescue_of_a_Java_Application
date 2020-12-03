@@ -8,6 +8,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class AnalyticsCounter {
@@ -19,14 +20,25 @@ public class AnalyticsCounter {
 		
 		try {
 			// first get input
-			BufferedReader reader = new BufferedReader (new FileReader(root));
-			String line = reader.readLine();
+			
 			
 			ReadSymptomDataFromFile readSDFFile = new ReadSymptomDataFromFile(root);
 
-			ArrayList<String> result = (ArrayList) readSDFFile.GetSymptoms();
+			List<String> result =  readSDFFile.GetSymptoms();
 			
-			HashMap<String, Integer> nbrCas = (HashMap<String, Integer>) readSDFFile.getCasSymptoms();
+			System.out.println(result);
+			
+			TraitementSymptomData traitSyptm = new TraitementSymptomData();
+			
+			Map<String, Integer> nbrCas = traitSyptm.getCasSymptoms();
+			System.out.println(nbrCas);
+			
+			//SaisiSymptom saisiSymptom = new SaisiSymptom();
+			
+			//saisiSymptom.writerSymptom("test un", null);
+			
+			
+			//-------------------------------------------------------------------------------
 
 			
 			StringBuilder str = new StringBuilder();

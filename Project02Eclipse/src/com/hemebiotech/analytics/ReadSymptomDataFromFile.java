@@ -15,36 +15,33 @@ import java.util.Map;
  */
 public class ReadSymptomDataFromFile implements ISymptomReader {
 
-	private String filepath;
-	private List<String> symptomes = new ArrayList<>();
-	private HashMap<String, Integer> nbrCas = new HashMap<String, Integer>();
+	protected String filepath;
+	protected List<String> symptomes = new ArrayList<>();
 	
 	
 	
+	
+	protected List<String> getSymptomes() {
+		return symptomes;
+	}
+
+
+	protected void setSymptomes(List<String> symptomes) {
+		this.symptomes = symptomes;
+	}
+
+
 	public String getFilepath() {
 		return filepath;
 	}
+	
 
 	public void setFilepath(String filepath) {
 		this.filepath = filepath;
 	}
-
-	public List<String> getSymptomes() {
-		return symptomes;
-	}
-
-	public void setSymptomes(List<String> symptomes) {
-		symptomes = symptomes;
-	}
-
-	public HashMap<String, Integer> getNbrCas() {
-		return nbrCas;
-	}
-
-	public void setNbrCas(HashMap<String, Integer> nbrCas) {
-		this.nbrCas = nbrCas;
-	}
-
+	
+	
+	public ReadSymptomDataFromFile () {}
 
 	/**
 	 * 
@@ -61,11 +58,13 @@ public class ReadSymptomDataFromFile implements ISymptomReader {
 	public List<String> GetSymptoms() {
 
 		if (filepath != null) {
+			
+			
 			try {
 				BufferedReader reader = new BufferedReader (new FileReader(filepath));
-				String line = reader.readLine();
+				String line;  
 				
-				while (line != null) {
+				while ((line = reader.readLine()) != null) {
 					this.symptomes.add(line);
 					line = reader.readLine();
 				}
@@ -80,31 +79,4 @@ public class ReadSymptomDataFromFile implements ISymptomReader {
 		return this.symptomes;
 	}
 	
-	
-	/**
-	 * @return  symptones et le nombre de cas
-	 */
-	public Map<String, Integer> getCasSymptoms(){
-	
-		int val;
-		
-			try {
-				for(String symptome: this.symptomes) {
-					
-					if(this.nbrCas.containsKey(symptome)) {
-						val = this.nbrCas.get(symptome);
-						val +=1;
-						this.nbrCas.put(symptome, val);
-						
-					}else {
-						this.nbrCas.put(symptome, 1);
-					}
-				}
-				
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-
-		return this.nbrCas;
-	}
 }
