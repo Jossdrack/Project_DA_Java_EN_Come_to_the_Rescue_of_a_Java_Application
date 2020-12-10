@@ -17,51 +17,27 @@ public class AnalyticsCounter {
 	private static String resultOut = "../Project_DA_Java_EN_Come_to_the_Rescue_of_a_Java_Application/Project02Eclipse/result.out";
 	
 	public static void main(String args[]){
-		
-		try {
-			// first get input
+
 			
-			
-			ReadSymptomDataFromFile readSDFFile = new ReadSymptomDataFromFile(root);
+			TraitementSymptomData readSDFFile = new TraitementSymptomData(root);
 
 			List<String> result =  readSDFFile.GetSymptoms();
 			
-			System.out.println(result);
-			
-			TraitementSymptomData traitSyptm = new TraitementSymptomData();
-			
-			Map<String, Integer> nbrCas = traitSyptm.getCasSymptoms();
+			Map<String, Integer> nbrCas = readSDFFile.getCasSymptoms();
 			System.out.println(nbrCas);
 			
-			//SaisiSymptom saisiSymptom = new SaisiSymptom();
 			
-			//saisiSymptom.writerSymptom("test un", null);
+			readSDFFile.addSymptom("Papa");
+			readSDFFile.addSymptom("Test");
+			readSDFFile.addSymptom("Test");
 			
 			
-			//-------------------------------------------------------------------------------
-
 			
-			StringBuilder str = new StringBuilder();
-			BufferedWriter bfwritr = new BufferedWriter( new FileWriter(resultOut));
+			result =  readSDFFile.GetSymptoms();
+			nbrCas = readSDFFile.getCasSymptoms();
 			
-		
-			for(Map.Entry<String, Integer> ligne: nbrCas.entrySet()) {
-				str.append(ligne.getKey() +" = " + ligne.getValue()+"\n");
+			readSDFFile.consulterSymptom(resultOut);
 			
-			}
-			
-			 bfwritr.write(str.toString());
-			
-			 bfwritr.close();    
-		
-			
-		}catch(FileNotFoundException e) {
-			System.out.println(e.getMessage());
-		}catch (IOException e) {
-			System.out.println(e.getMessage());
-		}catch (Exception e) {
-			System.out.println(e.getMessage());
-		}	
 
 		
 	}
