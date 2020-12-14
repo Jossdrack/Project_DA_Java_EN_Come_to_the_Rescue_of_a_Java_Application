@@ -12,11 +12,12 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 public class TraitementSymptomData extends SymptomData implements ISymptomTraitement{
 
 	private List<String> symptomes = new ArrayList<>();
-	private HashMap<String, Integer> nbrCas = new HashMap<String, Integer>();
+	private TreeMap<String, Integer> nbrCas = new TreeMap<String, Integer>();
 	
 	
 
@@ -26,9 +27,9 @@ public class TraitementSymptomData extends SymptomData implements ISymptomTraite
 
 
 	/**
-	 * @return  symptones et le nombre de cas
+	 * @return  TreeMap symptones et le nombre de cas
 	 */
-	public Map<String, Integer> getCasSymptoms(){
+	public TreeMap<String, Integer> getCasSymptoms(){
 	
 		int val;
 		
@@ -83,7 +84,7 @@ public class TraitementSymptomData extends SymptomData implements ISymptomTraite
 	
 	/**
 	 * Lister nombre de symptome
-	 * @param resultOut
+	 * @param String resultOut
 	 */
 	public void consulterSymptom(String resultOut) {
 		
@@ -129,7 +130,7 @@ public class TraitementSymptomData extends SymptomData implements ISymptomTraite
 	}
 	/**
 	 * Ajout symptom dans liste
-	 * @param symptom
+	 * @param String symptom
 	 */
 	public void addSymptom(String symptom) {
 		this.symptomes.add(symptom);

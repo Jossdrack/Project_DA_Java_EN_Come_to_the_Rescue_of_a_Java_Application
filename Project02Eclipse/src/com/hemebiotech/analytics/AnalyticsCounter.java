@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.TreeMap;
 
 public class AnalyticsCounter {
 	
@@ -23,7 +25,8 @@ public class AnalyticsCounter {
 
 			List<String> result =  readSDFFile.GetSymptoms();
 			
-			Map<String, Integer> nbrCas = readSDFFile.getCasSymptoms();
+			TreeMap<String, Integer> nbrCas = readSDFFile.getCasSymptoms();
+			//Set<String> symptomes = readSDFFile.getCasSymptoms().keySet();
 			System.out.println(nbrCas);
 			
 			
