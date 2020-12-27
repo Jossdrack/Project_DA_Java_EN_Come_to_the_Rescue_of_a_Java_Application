@@ -4,8 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 public interface ISymptomTraitement {
-	public Map<String, Integer> getCasSymptoms();
-	public  void opendAndWriteFile(String s);
-	public List<String> GetSymptoms();
+	public List<String> getSymptoms();
+	public void writeSymptoms(Map<String,Integer> mapSymptoms);
 
 }

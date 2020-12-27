@@ -1,33 +1,13 @@
 package com.hemebiotech.analytics;
 
-import java.util.ArrayList;
+
 import java.util.List;
+import java.util.Map;
 
 abstract class SymptomData {
 
-	protected String filepath;
-	protected List<String> symptomes = new ArrayList<>();
+	protected abstract Map<String, Integer> countSymptoms(List<String> symptoms);
 	
 	
-	
-	
-	protected List<String> getSymptomes() {
-		return symptomes;
-	}
-
-
-	protected void setSymptomes(List<String> symptomes) {
-		this.symptomes = symptomes;
-	}
-
-
-	public String getFilepath() {
-		return filepath;
-	}
-	
-
-	public void setFilepath(String filepath) {
-		this.filepath = filepath;
-	}
 	
 }

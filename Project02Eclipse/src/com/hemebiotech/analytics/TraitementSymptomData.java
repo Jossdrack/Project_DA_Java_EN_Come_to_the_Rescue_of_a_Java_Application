@@ -19,22 +19,25 @@ public class TraitementSymptomData extends SymptomData implements ISymptomTraite
 	private List<String> symptomes = new ArrayList<>();
 	private TreeMap<String, Integer> nbrCas = new TreeMap<String, Integer>();
 	
+	private String inputFile;
+	private String outputFile;
 	
 
-	public TraitementSymptomData(String file) {
-		super.filepath = file;
+	public TraitementSymptomData(String inputFile, String outputFile) {
+		this.inputFile = inputFile;
+		this.outputFile = outputFile;
 	}
 
 
 	/**
 	 * @return  TreeMap symptones et le nombre de cas
 	 */
-	public TreeMap<String, Integer> getCasSymptoms(){
+	public TreeMap<String, Integer> countSymptoms(List<String> listSymptoms){
 	
 		int val;
 		
 			try {System.out.println("---------------------");
-				for(String symptome: this.GetSymptoms()) {
+				for(String symptome: listSymptoms) {
 					
 					if(this.nbrCas.containsKey(symptome)) {
 						val = this.nbrCas.get(symptome);
@@ -55,19 +58,20 @@ public class TraitementSymptomData extends SymptomData implements ISymptomTraite
 	
 
 	/**
+	 * méthode permettant de récupérer les symptoms depuis un fichier texte
 	 * @return List de symptomes du fichier transmis en paramètre à la class
 	 */
 	@Override
-	public List<String> GetSymptoms() {
+	public List<String> getSymptoms() {
 
-		if (filepath != null) {
+		if (inputFile != null) {
 			
 			
 			try {
-				BufferedReader reader = new BufferedReader (new FileReader(filepath));
-				String line;  
+				BufferedReader reader = new BufferedReader (new FileReader(inputFile));
+				String line = reader.readLine();  
 				
-				while ((line = reader.readLine()) != null) {
+				while (line != null) {
 					this.symptomes.add(line);
 					line = reader.readLine();
 				}
@@ -77,8 +81,6 @@ public class TraitementSymptomData extends SymptomData implements ISymptomTraite
 			}
 		}
 		
-		Collections.sort(this.symptomes);
-		
 		return this.symptomes;
 	}
 	
@@ -86,11 +88,11 @@ public class TraitementSymptomData extends SymptomData implements ISymptomTraite
 	 * Lister nombre de symptome
 	 * @param String resultOut
 	 */
-	public void consulterSymptom(String resultOut) {
+	public void writeSymptoms(Map<String, Integer> mapSymptoms) {
 		
 		try {
 			StringBuilder str = new StringBuilder();
-			BufferedWriter bfwritr = new BufferedWriter( new FileWriter(resultOut));
+			BufferedWriter bfwritr = new BufferedWriter( new FileWriter(outputFile));
 			
 		
 			for(Map.Entry<String, Integer> ligne: nbrCas.entrySet()) {
@@ -109,32 +111,6 @@ public class TraitementSymptomData extends SymptomData implements ISymptomTraite
 			e.printStackTrace();
 			e.getMessage();
 		}
-	}
-	/**
-	 * Ajouter symptome directement fichier existant
-	 */
-	public  void opendAndWriteFile(String s) {
-		try
-		{
-			this.addSymptom(s);
-			this.GetSymptoms();
-			
-			 FileWriter fw = new FileWriter(super.getFilepath(),true);
-			 fw.write(s);
-			 fw.close();
-		}
-		catch(IOException ioe)
-		{
-			 ioe.getMessage();
-		}
-	}
-	/**
-	 * Ajout symptom dans liste
-	 * @param String symptom
-	 */
-	public void addSymptom(String symptom) {
-		this.symptomes.add(symptom);
-		//this.getCasSymptoms();
 	}
 
 }

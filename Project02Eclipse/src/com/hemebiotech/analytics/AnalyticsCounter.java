@@ -1,16 +1,6 @@
 package com.hemebiotech.analytics;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 import java.util.TreeMap;
 
 public class AnalyticsCounter {
@@ -20,28 +10,24 @@ public class AnalyticsCounter {
 	
 	public static void main(String args[]){
 
+			/*
+			 * Recupération des fichiers pour traitement 
+			 */
+			TraitementSymptomData  analyse = new TraitementSymptomData(root, resultOut);
+			/*
+			 * Récuperation des symptomes du fichier root
+			 */
+			List<String> result =  analyse.getSymptoms();
 			
-			TraitementSymptomData readSDFFile = new TraitementSymptomData(root);
-
-			List<String> result =  readSDFFile.GetSymptoms();
+			/*
+			 * Récuppération des symptomes et de leur nombre de cas
+			 */
+			TreeMap<String, Integer> mapSymptoms = analyse.countSymptoms(result);
 			
-			TreeMap<String, Integer> nbrCas = readSDFFile.getCasSymptoms();
-			//Set<String> symptomes = readSDFFile.getCasSymptoms().keySet();
-			System.out.println(nbrCas);
-			
-			
-			readSDFFile.addSymptom("Papa");
-			readSDFFile.addSymptom("Test");
-			readSDFFile.addSymptom("Test");
-			
-			
-			
-			result =  readSDFFile.GetSymptoms();
-			nbrCas = readSDFFile.getCasSymptoms();
-			
-			readSDFFile.consulterSymptom(resultOut);
-			
-
+			/*
+			 * Inscription des symptomes dans le fichier resultOut
+			 */
+			analyse.writeSymptoms(mapSymptoms);
 		
 	}
 		
