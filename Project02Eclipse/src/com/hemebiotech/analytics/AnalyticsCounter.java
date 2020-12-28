@@ -13,21 +13,22 @@ public class AnalyticsCounter {
 			/*
 			 * Recupération des fichiers pour traitement 
 			 */
-			TraitementSymptomData  analyse = new TraitementSymptomData(root, resultOut);
+			
+			AnalyseCounter analyseCounter = new AnalyseCounter(new ReadSymptomDataFromFile(root), new WriterResultToFile(resultOut), new CountSymptomFromList());
 			/*
 			 * Récuperation des symptomes du fichier root
 			 */
-			List<String> result =  analyse.getSymptoms();
+			List<String> lstSymptom =  analyseCounter.getSymptoms();
 			
 			/*
 			 * Récuppération des symptomes et de leur nombre de cas
 			 */
-			TreeMap<String, Integer> mapSymptoms = analyse.countSymptoms(result);
+			TreeMap<String, Integer> mapSymptoms = analyseCounter.countSymptoms(lstSymptom);
 			
 			/*
 			 * Inscription des symptomes dans le fichier resultOut
 			 */
-			analyse.writeSymptoms(mapSymptoms);
+			analyseCounter.writeSymptoms(mapSymptoms);
 		
 	}
 		
